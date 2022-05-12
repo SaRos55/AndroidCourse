@@ -5,28 +5,39 @@ import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.classes.Post
 
 class PostRepositoryInMemoryImpl : PostRepository {
-    private var post = Post(
-        id = 1,
-        author = "Василий Пупкин",
-        content = "Привет, это мой новый пост!",
-        published = "8 мая 15:44"
-    )
-    private val data = MutableLiveData(post)
-
-    override fun get(): LiveData<Post> = data
-    override fun like() {
-        var likedCount = post.likedCount
-        if (post.likedByMe) {
-            likedCount--
-        } else {
-            likedCount++
-        }
-        post = post.copy(likedByMe = !post.likedByMe, likedCount = likedCount)
-        data.value = post
+    private var posts = List(10) { index ->
+        Post(
+            id = index + 1L,
+            author = "Василий Пупкин",
+            content = "Привет, это мой пост №$index",
+            published = "8 мая 15:44"
+        )
     }
 
-    override fun share() {
-        post = post.copy(sharedCount = post.sharedCount + 1)
-        data.value = post
+    private val data = MutableLiveData(posts)
+
+    override fun getAll(): LiveData<List<Post>> = data
+    override fun likeByID(id: Long) {
+        posts = posts.map {
+            if (it.id != id) it else {
+                var likedCount = it.likedCount
+                if (it.likedByMe) {
+                    likedCount--
+                } else {
+                    likedCount++
+                }
+                it.copy(likedByMe = !it.likedByMe, likedCount = likedCount)
+            }
+        }
+        data.value = posts
+    }
+
+    override fun shareByID(id: Long) {
+        posts = posts.map {
+            if (it.id != id) it else {
+                it.copy(sharedCount = it.sharedCount + 1)
+            }
+        }
+        data.value = posts
     }
 }
