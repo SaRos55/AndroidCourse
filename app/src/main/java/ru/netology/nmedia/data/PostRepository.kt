@@ -7,4 +7,10 @@ interface PostRepository {
     fun getAll(): LiveData<List<Post>>
     fun likeByID(id: Long)
     fun shareByID(id: Long)
+    fun deleteByID(id: Long)
+    fun save(post: Post)
+
+    companion object {
+        const val NEW_POST_ID = 0L
+    }
 }
