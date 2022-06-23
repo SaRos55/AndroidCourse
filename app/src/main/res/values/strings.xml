@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">My first Application</string>
     <string name="hello">NMedia!</string>
+    <string name="remove">Remove</string>
+    <string name="post_text">post text</string>
+    <string name="edit">Edit</string>
+    <string name="edit_message">Edit Message</string>
 </resources>
