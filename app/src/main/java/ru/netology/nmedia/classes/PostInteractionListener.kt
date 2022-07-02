@@ -5,4 +5,5 @@ interface PostInteractionListener {
     fun onShareListener(post: Post)
     fun onDeleteListener(post: Post)
     fun onEditListener(post: Post)
+    fun onVideoListener(post: Post)
 }

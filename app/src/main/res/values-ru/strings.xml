@@ -6,4 +6,6 @@
     <string name="post_text">Текст поста</string>
     <string name="edit">Изменить</string>
     <string name="edit_message">Редактирование поста</string>
+    <string name="post_save">Сохранить сообщение</string>
+    <string name="add_post">Добавить пост</string>
 </resources>
