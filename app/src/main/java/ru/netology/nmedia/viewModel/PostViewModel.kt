@@ -9,8 +9,9 @@ import ru.netology.nmedia.data.PostRepositoryInMemoryImpl
 class PostViewModel : ViewModel() {
     private val repository: PostRepository = PostRepositoryInMemoryImpl()
     val data = repository.getAll()
+    private val currentPost = MutableLiveData<Post?>(null)
 
-    val currentPost = MutableLiveData<Post?>(null)
+    val videoEvent = SingleLiveEvent<Post>()
 
     fun likeByID(id: Long) = repository.likeByID(id)
     fun shareByID(id: Long) = repository.shareByID(id)
@@ -26,7 +27,8 @@ class PostViewModel : ViewModel() {
             author = "Ростислав",
             content = content,
             published = "21 июня 14:46",
-            likedCount = 0
+            likedCount = 0,
+            video = "https://www.youtube.com/watch?v=WhWc3b3KhnY"
         )
         repository.save(post)
         currentPost.value = null
@@ -36,8 +38,9 @@ class PostViewModel : ViewModel() {
         currentPost.value = post
     }
 
-    fun onCancelButtonClicked() {
-        currentPost.value = null
+    fun onClickVideo(post: Post) {
+        videoEvent.value = post
     }
+
 
 }

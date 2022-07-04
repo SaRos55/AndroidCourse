@@ -69,7 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="@dimen/common_spacing"
-        app:layout_constraintBottom_toTopOf="@id/barrier_bottom"
+        app:layout_constraintBottom_toTopOf="@id/video"
         app:layout_constraintTop_toBottomOf="@id/barrier_top"
         tools:text="@tools:sample/lorem/random" />
 
@@ -98,10 +98,21 @@
         style="@style/Widget.AppTheme.ViewsCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="@id/likes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/likes"
-        tools:text="100500"
-        android:enabled="false"/>
+        tools:text="100500" />
+
+    <ImageView
+        android:id="@+id/video"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/video_height"
+        android:layout_marginBottom="@dimen/common_spacing"
+        android:background="@android:color/darker_gray"
+        android:padding="96dp"
+        app:layout_constraintBottom_toTopOf="@id/barrier_bottom"
+        app:layout_constraintTop_toBottomOf="@id/content"
+        app:srcCompat="@drawable/ic_play_circle_48" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

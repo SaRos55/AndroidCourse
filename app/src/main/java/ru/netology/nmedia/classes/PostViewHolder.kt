@@ -1,5 +1,6 @@
 package ru.netology.nmedia.classes
 
+import android.view.View
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.R
@@ -14,9 +15,6 @@ class PostViewHolder(
             author.text = post.author
             published.text = post.published
             content.text = post.content
-//            likes.setButtonDrawable(
-//                if (post.likedByMe) R.drawable.ic_liked_24dp else R.drawable.ic_likes_24dp
-//            )
             likes.isChecked = post.likedByMe
             likes.text = convertCount(post.likedCount)
             shares.text = convertCount(post.sharedCount)
@@ -26,6 +24,13 @@ class PostViewHolder(
             shares.setOnClickListener {
                 interactionListener.onShareListener(post)
             }
+
+            video.visibility = if (post.video == null) View.GONE else View.VISIBLE
+            video.setOnClickListener {
+                interactionListener.onVideoListener(post)
+            }
+
+
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {
                     inflate(R.menu.options_post)
