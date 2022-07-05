@@ -1,14 +1,21 @@
 package ru.netology.nmedia.viewModel
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import ru.netology.nmedia.classes.Post
+import ru.netology.nmedia.data.FilePostRepository
 import ru.netology.nmedia.data.PostRepository
-import ru.netology.nmedia.data.PostRepositoryInMemoryImpl
 
-class PostViewModel : ViewModel() {
-    private val repository: PostRepository = PostRepositoryInMemoryImpl()
+class PostViewModel(
+    application: Application
+) : AndroidViewModel(application) {
+
+    private val repository: PostRepository =
+        FilePostRepository(application)
+
     val data = repository.getAll()
+
     private val currentPost = MutableLiveData<Post?>(null)
 
     val videoEvent = SingleLiveEvent<Post>()
@@ -41,6 +48,4 @@ class PostViewModel : ViewModel() {
     fun onClickVideo(post: Post) {
         videoEvent.value = post
     }
-
-
 }
