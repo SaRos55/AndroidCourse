@@ -23,6 +23,7 @@ class PostViewModel(
     fun likeByID(id: Long) = repository.likeByID(id)
     fun shareByID(id: Long) = repository.shareByID(id)
     fun deleteByID(id: Long) = repository.deleteByID(id)
+    fun postByID(id: Long) = repository.getPost(id)
 
     fun onSaveButtonClicked(content: String) {
         if (content.isBlank()) return

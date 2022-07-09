@@ -14,6 +14,8 @@ class FilePostRepository(
     private val application: Application
 ) : PostRepository {
 
+    private val data: MutableLiveData<List<Post>>
+
     private val gson = Gson()
     private val type = TypeToken.getParameterized(List::class.java, Post::class.java).type
 
@@ -39,8 +41,6 @@ class FilePostRepository(
         prefs.edit { putLong(NEXT_ID_PREFS_KEY, newValue)    }
 
     }
-
-    private val data: MutableLiveData<List<Post>>
 
     init {
         val postsFile = application.filesDir.resolve(FILE_NAME)
@@ -85,6 +85,13 @@ class FilePostRepository(
         if (post.id == PostRepository.NEW_POST_ID) insert(post) else update(post)
     }
 
+    override fun getPost(id: Long): Post? {
+        posts.forEach {
+            if (it.id==id) return it
+        }
+        return null
+    }
+
     private fun insert(post: Post) {
         posts = listOf(
             post.copy(id = ++nextID)
@@ -96,6 +103,8 @@ class FilePostRepository(
             if (it.id == post.id) post else it
         }
     }
+
+
 
     private companion object {
         const val NEXT_ID_PREFS_KEY = "next ID"
