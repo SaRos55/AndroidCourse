@@ -30,6 +30,10 @@ class PostViewHolder(
                 interactionListener.onVideoListener(post)
             }
 
+            body.setOnClickListener {
+                interactionListener.onBodyListener(post)
+            }
+
 
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {

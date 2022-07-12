@@ -78,6 +78,13 @@ class SharedPrefsPostRepository(
         if (post.id == PostRepository.NEW_POST_ID) insert(post) else update(post)
     }
 
+    override fun getPost(id: Long): Post? {
+        posts.forEach {
+            if (it.id==id) return it
+        }
+        return null
+    }
+
     private fun insert(post: Post) {
         posts = listOf(
             post.copy(id = ++nextID)
