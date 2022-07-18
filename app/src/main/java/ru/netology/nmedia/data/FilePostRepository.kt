@@ -24,7 +24,8 @@ class FilePostRepository(
             "Data value should not be null"
         }
         set(value) {
-            application.openFileOutput(FILE_NAME, Context.MODE_PRIVATE
+            application.openFileOutput(
+                FILE_NAME, Context.MODE_PRIVATE
             ).bufferedWriter().use {
                 it.write(gson.toJson(value))
             }
@@ -38,7 +39,7 @@ class FilePostRepository(
     private var nextID: Long by Delegates.observable(
         prefs.getLong(NEXT_ID_PREFS_KEY, 0L)
     ) { _, _, newValue ->
-        prefs.edit { putLong(NEXT_ID_PREFS_KEY, newValue)    }
+        prefs.edit { putLong(NEXT_ID_PREFS_KEY, newValue) }
 
     }
 
@@ -87,7 +88,7 @@ class FilePostRepository(
 
     override fun getPost(id: Long): Post? {
         posts.forEach {
-            if (it.id==id) return it
+            if (it.id == id) return it
         }
         return null
     }
@@ -103,7 +104,6 @@ class FilePostRepository(
             if (it.id == post.id) post else it
         }
     }
-
 
 
     private companion object {

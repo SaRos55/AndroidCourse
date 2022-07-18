@@ -4,15 +4,20 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.classes.Post
-import ru.netology.nmedia.data.FilePostRepository
 import ru.netology.nmedia.data.PostRepository
+import ru.netology.nmedia.data.SQLiteRepository
+import ru.netology.nmedia.db.AppDb
 
 class PostViewModel(
     application: Application
 ) : AndroidViewModel(application) {
 
     private val repository: PostRepository =
-        FilePostRepository(application)
+        SQLiteRepository(
+            dao = AppDb.getInstance(
+                context = application
+            ).postDao
+        )
 
     val data = repository.getAll()
 
